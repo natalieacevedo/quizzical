@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./source.scss";
+import Start from "./components/StartPage";
+import Options from "./components/Options";
+import React, { useState } from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [displayQuestions, setDisplayQuestions] = useState(false);
+  let displayComponent;
+
+  function selectChoices() {
+    setDisplayQuestions(!displayQuestions);
+  }
+
+  if (!displayQuestions) {
+    displayComponent = (
+      <div className="introduction">
+        <Start />
+        <button onClick={selectChoices}>Start</button>
+      </div>
+    );
+  } else {
+    displayComponent = <Options />;
+  }
+
+  return <>{displayComponent}</>;
 }
 
 export default App;
