@@ -19,7 +19,7 @@ function App() {
       </div>
     );
   } else {
-    displayComponent = <Options />;
+    displayComponent = <Options restart={selectChoices} />;
   }
 
   return <>{displayComponent}</>;

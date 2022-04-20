@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Questions from "./Questions";
 
-function Options() {
+function Options({ restart }) {
   const [userOptions, setUserOptions] = useState({
     category: "Any Category",
     difficulty: "Any Difficulty",
@@ -74,7 +74,7 @@ function Options() {
       </section>
     );
   } else {
-    return <Questions options={userOptions} />;
+    return <Questions options={userOptions} restart={restart} />;
   }
 }
 

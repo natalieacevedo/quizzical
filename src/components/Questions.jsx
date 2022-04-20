@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function Questions({ options }) {
+function Questions({ options, restart }) {
   const [questions, setAllQuestions] = useState(null);
-
-  console.log(options);
 
   function getData() {
     if (
@@ -45,44 +43,38 @@ function Questions({ options }) {
     }
   }
 
-    useEffect(getData, [options]);
+  useEffect(getData, [options]);
 
-    console.log(questions);
+  console.log(questions);
 
-    if (questions) {
-      return (
-        <div className="questionsContainer">
-          {questions.map((question, ind) => {
-            let allAnswers = [...question.incorrect_answers];
-            allAnswers.splice(
-              Math.floor(Math.random() * (allAnswers.length + 1)),
-              0,
-              question.correct_answer
-            );
+  if (questions) {
+    return (
+      <div className="questionsContainer">
+        {questions.map((question, ind) => {
+          let allAnswers = [...question.incorrect_answers];
+          allAnswers.splice(
+            Math.floor(Math.random() * (allAnswers.length + 1)),
+            0,
+            question.correct_answer
+          );
 
-            return (
-              <>
-                <h3 key={ind}>{question.question}</h3>
-                <ul>
-                  {allAnswers.map((element, ind) => (
-                    <li key={ind}>{element}</li>
-                  ))}
-                </ul>
-              </>
-            );
-          })}
-        </div>
-      );
-    }
+          return (
+            <>
+              <h3 key={ind}>{question.question}</h3>
+              <ul>
+                {allAnswers.map((element, ind) => (
+                  <li key={ind}>{element}</li>
+                ))}
+              </ul>
+            </>
+          );
+        })}
 
-
+        <button onClick={restart}>Play again</button>
+      </div>
+    );
+  }
 }
 
 export default Questions;
-
-// const months = ['Jan', 'March', 'April', 'June'];
-// months.splice(1, 0, 'Feb');
-// // inserts at index 1
-// console.log(months);
-// // expected output: Array ["Jan", "Feb", "March", "April", "June"]
 
