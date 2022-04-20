@@ -45,17 +45,44 @@ function Questions({ options }) {
     }
   }
 
-  useEffect(getData, [options]);
+    useEffect(getData, [options]);
 
-  if (questions) {
-    console.log(questions[0]);
-  }
+    console.log(questions);
 
-  return (
-    <div className="questionsContainer">
-      <h2>Here are all the questions</h2>
-    </div>
-  );
+    if (questions) {
+      return (
+        <div className="questionsContainer">
+          {questions.map((question, ind) => {
+            let allAnswers = [...question.incorrect_answers];
+            allAnswers.splice(
+              Math.floor(Math.random() * (allAnswers.length + 1)),
+              0,
+              question.correct_answer
+            );
+
+            return (
+              <>
+                <h3 key={ind}>{question.question}</h3>
+                <ul>
+                  {allAnswers.map((element, ind) => (
+                    <li key={ind}>{element}</li>
+                  ))}
+                </ul>
+              </>
+            );
+          })}
+        </div>
+      );
+    }
+
+
 }
 
 export default Questions;
+
+// const months = ['Jan', 'March', 'April', 'June'];
+// months.splice(1, 0, 'Feb');
+// // inserts at index 1
+// console.log(months);
+// // expected output: Array ["Jan", "Feb", "March", "April", "June"]
+
