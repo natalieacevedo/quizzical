@@ -1,27 +1,33 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+//import axios from "axios";
+import React, { useState } from "react";
 import Questions from "./Questions";
 
 function Options() {
   const [userOptions, setUserOptions] = useState({
-    category: "https://opentdb.com/api.php?amount=10",
-    difficulty: "",
+    category: "Any Category",
+    difficulty: "Any Difficulty",
   });
 
+  const [getQuestions, setGetQuestions] = useState(false);
+
+  //https://opentdb.com/api.php?amount=10
   function getUserInput(event) {
     const { value, id } = event.target;
-    //console.log(value, id);
 
     setUserOptions((prevData) => {
-      let difficultyLevel = id === "difficulty" ? value : "";
-      let categorySelected = id === "category" ? value : "";
+      let difficultyLevel = id === "difficulty" ? value : "Any Difficulty";
+      let categorySelected = id === "category" ? value : "Any Category";
 
       return {
         ...prevData,
         category:
-          categorySelected === "" ? prevData["category"] : categorySelected,
+          categorySelected === "Any Category"
+            ? prevData["category"]
+            : categorySelected,
         difficulty:
-          difficultyLevel === "" ? prevData["difficulty"] : difficultyLevel,
+          difficultyLevel === "Any Difficulty"
+            ? prevData["difficulty"]
+            : difficultyLevel,
       };
     });
   }
@@ -62,6 +68,10 @@ function Options() {
         <option value="medium">Medium</option>
         <option value="hard">Hard</option>
       </select>
+      <button onClick={() => setGetQuestions(!getQuestions)}>
+        See questions
+      </button>
+      {getQuestions && <Questions />}
     </section>
   );
 }
