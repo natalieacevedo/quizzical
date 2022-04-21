@@ -30,7 +30,6 @@ function Options({ restart }) {
       };
     });
   }
-  console.log(userOptions);
 
   if (!getQuestions) {
     return (

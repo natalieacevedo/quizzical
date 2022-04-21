@@ -6,15 +6,28 @@ function Questions({ options, restart }) {
 
     function getData() {
       function randomAnswers(arr) {
-        let allAnswers = arr.map((obj) => {
-          allAnswers = [...obj.incorrect_answers];
-          return allAnswers.splice(
-            Math.floor(Math.random() * (allAnswers.length + 1)),
+        let finalProperties = [];
+
+        console.log(arr);
+
+        arr.forEach((obj) => {
+          let allAnswersTogheter = [...obj.incorrect_answers];
+          let eachObject = {
+            question: obj.question,
+            correct_answer: obj.correct_answer,
+            answersCombined: "",
+          };
+
+          allAnswersTogheter.splice(
+            Math.floor(Math.random() * (allAnswersTogheter.length + 1)),
             0,
             obj.correct_answer
           );
+          eachObject.answersCombined = allAnswersTogheter;
+          finalProperties.push(eachObject);
         });
-        return allAnswers;
+
+        return finalProperties;
       }
 
       if (
@@ -24,7 +37,10 @@ function Questions({ options, restart }) {
         axios
           .get("https://opentdb.com/api.php?amount=10")
           .then((response) => response.data)
-          .then((data) => setAllQuestions(data.results));
+          .then((data) => {
+            console.log(randomAnswers(data.results));
+            return setAllQuestions(data.results);
+          });
       } else if (
         options["category"] === "Any Category" &&
         options["difficulty"] !== "Any Difficulty"
@@ -55,37 +71,35 @@ function Questions({ options, restart }) {
       }
     }
 
-    useEffect(getData, [options]);
+  useEffect(getData, [options]);
 
-    console.log(questions);
+  if (questions) {
+    return (
+      <div className="questionsContainer">
+        {questions.map((question, ind) => {
+          let allAnswers = [...question.incorrect_answers];
+          allAnswers.splice(
+            Math.floor(Math.random() * (allAnswers.length + 1)),
+            0,
+            question.correct_answer
+          );
 
-    if (questions) {
-      return (
-        <div className="questionsContainer">
-          {questions.map((question, ind) => {
-            let allAnswers = [...question.incorrect_answers];
-            allAnswers.splice(
-              Math.floor(Math.random() * (allAnswers.length + 1)),
-              0,
-              question.correct_answer
-            );
+          return (
+            <>
+              <h3 key={ind}>{question.question}</h3>
+              <ul className="listAnswers">
+                {allAnswers.map((element, ind) => (
+                  <li key={ind}>{element}</li>
+                ))}
+              </ul>
+            </>
+          );
+        })}
 
-            return (
-              <>
-                <h3 key={ind}>{question.question}</h3>
-                <ul className="listAnswers">
-                  {allAnswers.map((element, ind) => (
-                    <li key={ind}>{element}</li>
-                  ))}
-                </ul>
-              </>
-            );
-          })}
-
-          <button onClick={restart}>Play again</button>
-        </div>
-      );
-    }
+        <button onClick={restart}>Play again</button>
+      </div>
+    );
+  }
 }
 
 export default Questions;
