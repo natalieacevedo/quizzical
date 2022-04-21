@@ -1,0 +1,17 @@
+.listAnswers{
+    display:flex;
+    justify-content: space-around;
+    list-style: none;
+    li{
+        border: 5px solid pink;
+        cursor: pointer;
+    }
+}
+
+.correct{
+    background-color: greenyellow;
+}
+
+.chosenOne{
+    background-color: red;
+}
