@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+
+
+
 function Questions({ options, restart }) {
   const [questions, setAllQuestions] = useState(null);
+  const [responseError, setResponseError] = useState(0);
 
   function getData() {
     function propertiesNeeded(arr) {
@@ -50,59 +54,32 @@ function Questions({ options, restart }) {
     }
 
     console.log(params);
+    console.log(responseError);
     axios
       .get("https://opentdb.com/api.php", { params })
-      .then((response) => response.data)
-      .then(
-        (data) => setAllQuestions(propertiesNeeded(data.results))
-        //setAllQuestions(propertiesNeeded());
-      );
+      // FIXME handle response_code !==0
+      .then((response) => {
+        console.log(typeof response.data.response_code);
+        setResponseError(response.data.response_code);
 
-    //setAllQuestions(propertiesNeeded());
-    //   if (
-    //     options["category"] === "Any Category" &&
-    //     options["difficulty"] === "Any Difficulty"
-    //   ) {
-    //     axios
-    //       .get("https://opentdb.com/api.php?amount=10")
-    //       .then((response) => response.data)
-    //       .then((data) => {
-    //         console.log(propertiesNeeded(data.results));
-    //         return setAllQuestions(data.results);
-    //       });
-    //   } else if (
-    //     options["category"] === "Any Category" &&
-    //    options["difficulty"] !== "Any Difficulty"
-    //   ) {
-    //     axios
-    //       .get(
-    //         `https://opentdb.com/api.php?amount=10&difficulty=${options["difficulty"]}`
-    //       )
-    //       .then((response) => response.data)
-    //       .then((data) => setAllQuestions(data.results));
-    // acaaaa  } else if (
-    //     options["category"] !== "Any Category" &&
-    //     options["difficulty"] === "Any Difficulty"
-    //   ) {
-    //     axios
-    //       .get(
-    //         `https://opentdb.com/api.php?amount=10&category=${options["category"]}`
-    //       )
-    //       .then((response) => response.data)
-    //       .then((data) => setAllQuestions(data.results));
-    //   } else {
-    //     axios
-    //       .get(
-    //         `https://opentdb.com/api.php?amount=10&category=${options["category"]}&difficulty=${options["difficulty"]}`
-    //       )
-    //       .then((response) => response.data)
-    //       .then((data) => setAllQuestions(data.results));
-    //   }
+        return response.data;
+      })
+      .then((data) => setAllQuestions(propertiesNeeded(data.results)));
   }
 
-  useEffect(getData, [options]);
+  useEffect(getData, [options, responseError]);
 
-  if (questions) {
+  if (responseError) {
+    return (
+      <>
+        <h1>
+          There are not enough questions with your chosen parameters, please try
+          something different
+        </h1>
+        <button onClick={restart}>Play again</button>
+      </>
+    );
+  } else if (questions) {
     return (
       <div className="questionsContainer">
         {questions.map((question, ind) => {
@@ -122,7 +99,7 @@ function Questions({ options, restart }) {
       </div>
     );
   } else {
-    <h1>Loading</h1>;
+    return <h1>Loading</h1>;
   }
 }
 
