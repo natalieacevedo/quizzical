@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
+import Question from "./Question";
 import axios from "axios";
-
-
-
 
 function Questions({ options, restart }) {
   const [questions, setAllQuestions] = useState(null);
   const [responseError, setResponseError] = useState(0);
-  const [responseArr, setResponseArr] = useState([]);
 
   function getData() {
     function propertiesNeeded(arr) {
@@ -32,7 +29,6 @@ function Questions({ options, restart }) {
         finalProperties.push(eachObject);
       });
 
-      console.log(finalProperties);
       return finalProperties;
     }
 
@@ -68,15 +64,6 @@ function Questions({ options, restart }) {
 
   useEffect(getData, [options, responseError]);
 
-  function onClickListItem(element, correctAnswer) {
-    console.log(element, correctAnswer);
-    setResponseArr((prev) => {
-      let newArr = [...prev];
-      newArr.push(element, correctAnswer);
-      return newArr;
-    });
-  }
-
   if (responseError) {
     return (
       <>
@@ -88,37 +75,19 @@ function Questions({ options, restart }) {
       </>
     );
   } else if (questions) {
-    console.log(responseArr);
     return (
       <div className="questionsContainer">
         {questions.map((question, indi) => {
           return (
             <>
               <h3 key={indi}>{question.question}</h3>
-              <ul className="listAnswers">
-                {question.answersCombined.map((element, ind) => {
-                  return (
-                    <li
-                      onClick={() =>
-                        onClickListItem(element, question.correct_answer)
-                      }
-                      key={ind}
-                      // className={
-                      //   responseArr.length > 0 &&
-                      //   responseArr[indi][ind] === element
-                      //     ? "chosenOne"
-                      //     : ""
-                      // }
-                    >
-                      {element}
-                    </li>
-                  );
-                })}
-              </ul>
+              <Question
+                allAnswers={question.answersCombined}
+                rightAnswer={question.correct_answer}
+              />
             </>
           );
         })}
-
         <button onClick={restart}>Play again</button>
       </div>
     );
