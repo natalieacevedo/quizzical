@@ -7,6 +7,7 @@ import axios from "axios";
 function Questions({ options, restart }) {
   const [questions, setAllQuestions] = useState(null);
   const [responseError, setResponseError] = useState(0);
+  const [responseArr, setResponseArr] = useState([]);
 
   function getData() {
     function propertiesNeeded(arr) {
@@ -53,8 +54,6 @@ function Questions({ options, restart }) {
       params.difficulty = options["difficulty"];
     }
 
-    console.log(params);
-    console.log(responseError);
     axios
       .get("https://opentdb.com/api.php", { params })
       // FIXME handle response_code !==0
@@ -69,6 +68,15 @@ function Questions({ options, restart }) {
 
   useEffect(getData, [options, responseError]);
 
+  function onClickListItem(element, correctAnswer) {
+    console.log(element, correctAnswer);
+    setResponseArr((prev) => {
+      let newArr = [...prev];
+      newArr.push(element, correctAnswer);
+      return newArr;
+    });
+  }
+
   if (responseError) {
     return (
       <>
@@ -80,16 +88,32 @@ function Questions({ options, restart }) {
       </>
     );
   } else if (questions) {
+    console.log(responseArr);
     return (
       <div className="questionsContainer">
-        {questions.map((question, ind) => {
+        {questions.map((question, indi) => {
           return (
             <>
-              <h3 key={ind}>{question.question}</h3>
+              <h3 key={indi}>{question.question}</h3>
               <ul className="listAnswers">
-                {question.answersCombined.map((element, ind) => (
-                  <li key={ind}>{element}</li>
-                ))}
+                {question.answersCombined.map((element, ind) => {
+                  return (
+                    <li
+                      onClick={() =>
+                        onClickListItem(element, question.correct_answer)
+                      }
+                      key={ind}
+                      // className={
+                      //   responseArr.length > 0 &&
+                      //   responseArr[indi][ind] === element
+                      //     ? "chosenOne"
+                      //     : ""
+                      // }
+                    >
+                      {element}
+                    </li>
+                  );
+                })}
               </ul>
             </>
           );
