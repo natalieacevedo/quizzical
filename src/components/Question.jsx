@@ -1,21 +1,25 @@
-function Question({ allAnswers, rightAnswer, userInput, responses }) {
-  console.log(allAnswers);
+function Question({
+  allAnswers,
+  rightAnswer,
+  userInput,
+  responses,
+  indexQuestion,
+}) {
+  const response = responses[indexQuestion];
+  console.log(indexQuestion);
   console.log(responses);
+  console.log(allAnswers);
+  console.log(response);
 
   return (
     <ul className="listAnswers">
       {allAnswers.map((answer, ind) => {
-        if (responses[ind] !== undefined) {
-          console.log(responses);
-        }
         return (
           <li
-            onClick={() => userInput(answer, rightAnswer)}
+            onClick={() => userInput(answer, rightAnswer, indexQuestion)}
             key={ind}
             className={
-              responses.length > 0 &&
-              responses.findIndex((obj) => obj["chosenAnswer"] === answer) !==
-                -1
+              response !== null && response.chosenAnswer === answer
                 ? "chosenOne"
                 : ""
             }

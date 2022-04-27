@@ -5,10 +5,13 @@ import axios from "axios";
 function Questions({ options, restart }) {
   const [questions, setAllQuestions] = useState(null);
   const [responseError, setResponseError] = useState(0);
-  const [responses, setResponses] = useState([]);
+  const [responses, setResponses] = useState(new Array(10).fill(null));
 
-  function userInput(element, correctAnswer) {
+  function userInput(element, correctAnswer, inde) {
     //     console.log(element, correctAnswer);
+
+    console.log(inde);
+
     setResponses((prev) => {
       let eachInput = {
         correctOne: correctAnswer,
@@ -17,7 +20,8 @@ function Questions({ options, restart }) {
 
       let newArr = [...prev];
       console.log(newArr);
-      newArr.push(eachInput);
+      // newArr.push(eachInput);
+      newArr[inde] = eachInput;
       return newArr;
     });
   }
@@ -88,7 +92,6 @@ function Questions({ options, restart }) {
       </>
     );
   } else if (questions) {
-    //setResponses(new Array(questions.length).fill(null));
     return (
       <div className="questionsContainer">
         {questions.map((question, indi) => {
@@ -100,6 +103,7 @@ function Questions({ options, restart }) {
                 rightAnswer={question.correct_answer}
                 userInput={userInput}
                 responses={responses}
+                indexQuestion={indi}
               />
             </>
           );
