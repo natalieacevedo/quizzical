@@ -1,35 +1,21 @@
-import React, { useState } from "react";
-
-function Question({ allAnswers, rightAnswer }) {
-  const [responseArr, setResponseArr] = useState([]);
-
-  function userInput(element, correctAnswer) {
-    console.log(element, correctAnswer);
-
-    setResponseArr((prev) => {
-      let eachInput = {
-        correctOne: correctAnswer,
-        chosenAnswer: element,
-      };
-
-      let newArr = [...prev];
-      console.log(newArr);
-      newArr.push(eachInput);
-      return newArr;
-    });
-  }
-
-  console.log(responseArr);
+function Question({ allAnswers, rightAnswer, userInput, responses }) {
+  console.log(allAnswers);
+  console.log(responses);
 
   return (
     <ul className="listAnswers">
       {allAnswers.map((answer, ind) => {
+        if (responses[ind] !== undefined) {
+          console.log(responses);
+        }
         return (
           <li
             onClick={() => userInput(answer, rightAnswer)}
             key={ind}
             className={
-              responseArr.length > 0 && responseArr[0].correctOne === answer
+              responses.length > 0 &&
+              responses.findIndex((obj) => obj["chosenAnswer"] === answer) !==
+                -1
                 ? "chosenOne"
                 : ""
             }

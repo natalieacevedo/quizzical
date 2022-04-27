@@ -5,12 +5,26 @@ import axios from "axios";
 function Questions({ options, restart }) {
   const [questions, setAllQuestions] = useState(null);
   const [responseError, setResponseError] = useState(0);
+  const [responses, setResponses] = useState([]);
+
+  function userInput(element, correctAnswer) {
+    //     console.log(element, correctAnswer);
+    setResponses((prev) => {
+      let eachInput = {
+        correctOne: correctAnswer,
+        chosenAnswer: element,
+      };
+
+      let newArr = [...prev];
+      console.log(newArr);
+      newArr.push(eachInput);
+      return newArr;
+    });
+  }
 
   function getData() {
     function propertiesNeeded(arr) {
       let finalProperties = [];
-
-      console.log(arr);
 
       arr.forEach((obj) => {
         let allAnswersTogether = [...obj.incorrect_answers];
@@ -54,7 +68,6 @@ function Questions({ options, restart }) {
       .get("https://opentdb.com/api.php", { params })
       // FIXME handle response_code !==0
       .then((response) => {
-        console.log(typeof response.data.response_code);
         setResponseError(response.data.response_code);
 
         return response.data;
@@ -75,6 +88,7 @@ function Questions({ options, restart }) {
       </>
     );
   } else if (questions) {
+    //setResponses(new Array(questions.length).fill(null));
     return (
       <div className="questionsContainer">
         {questions.map((question, indi) => {
@@ -84,6 +98,8 @@ function Questions({ options, restart }) {
               <Question
                 allAnswers={question.answersCombined}
                 rightAnswer={question.correct_answer}
+                userInput={userInput}
+                responses={responses}
               />
             </>
           );
@@ -96,6 +112,4 @@ function Questions({ options, restart }) {
   }
 }
 
-
 export default Questions;
-
