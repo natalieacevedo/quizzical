@@ -9,6 +9,13 @@ function Questions({ options, restart }) {
   const [displayResults, setDisplayResults] = useState(false);
 
   const finishGame = responses.some((obj) => obj === null);
+  let numRightAnswers = displayResults
+    ? responses.reduce(
+        (prev, current) =>
+          current.correctOne === current.chosenAnswer ? (prev += 1) : prev,
+        0
+      )
+    : 0;
 
   function userInput(element, correctAnswer, inde) {
     if (!displayResults) {
@@ -20,7 +27,6 @@ function Questions({ options, restart }) {
 
         let newArr = [...prev];
         console.log(newArr);
-        // newArr.push(eachInput);
         newArr[inde] = eachInput;
         return newArr;
       });
@@ -69,7 +75,7 @@ function Questions({ options, restart }) {
 
     axios
       .get("https://opentdb.com/api.php", { params })
-      // FIXME handle response_code !==0
+
       .then((response) => {
         setResponseError(response.data.response_code);
 
@@ -112,6 +118,9 @@ function Questions({ options, restart }) {
         <button onClick={() => setDisplayResults(true)} disabled={finishGame}>
           Find your results
         </button>
+        {displayResults && (
+          <p>Your correct number of answers is {numRightAnswers}</p>
+        )}
       </div>
     );
   } else {
