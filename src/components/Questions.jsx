@@ -6,24 +6,25 @@ function Questions({ options, restart }) {
   const [questions, setAllQuestions] = useState(null);
   const [responseError, setResponseError] = useState(0);
   const [responses, setResponses] = useState(new Array(10).fill(null));
+  const [displayResults, setDisplayResults] = useState(false);
+
+  const finishGame = responses.some((obj) => obj === null);
 
   function userInput(element, correctAnswer, inde) {
-    //     console.log(element, correctAnswer);
+    if (!displayResults) {
+      setResponses((prev) => {
+        let eachInput = {
+          correctOne: correctAnswer,
+          chosenAnswer: element,
+        };
 
-    console.log(inde);
-
-    setResponses((prev) => {
-      let eachInput = {
-        correctOne: correctAnswer,
-        chosenAnswer: element,
-      };
-
-      let newArr = [...prev];
-      console.log(newArr);
-      // newArr.push(eachInput);
-      newArr[inde] = eachInput;
-      return newArr;
-    });
+        let newArr = [...prev];
+        console.log(newArr);
+        // newArr.push(eachInput);
+        newArr[inde] = eachInput;
+        return newArr;
+      });
+    }
   }
 
   function getData() {
@@ -49,8 +50,6 @@ function Questions({ options, restart }) {
 
       return finalProperties;
     }
-
-    ////////////////////////from here new code
 
     let params = { amount: 10 };
 
@@ -104,11 +103,15 @@ function Questions({ options, restart }) {
                 userInput={userInput}
                 responses={responses}
                 indexQuestion={indi}
+                displayResults={displayResults}
               />
             </>
           );
         })}
         <button onClick={restart}>Play again</button>
+        <button onClick={() => setDisplayResults(true)} disabled={finishGame}>
+          Find your results
+        </button>
       </div>
     );
   } else {

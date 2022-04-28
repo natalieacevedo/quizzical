@@ -1,15 +1,15 @@
+import React, { useState } from "react";
+
 function Question({
   allAnswers,
   rightAnswer,
   userInput,
   responses,
   indexQuestion,
+  displayResults,
 }) {
   const response = responses[indexQuestion];
-  console.log(indexQuestion);
-  console.log(responses);
-  console.log(allAnswers);
-  console.log(response);
+  const [isOver, setIsOver] = useState(false);
 
   return (
     <ul className="listAnswers">
@@ -19,7 +19,9 @@ function Question({
             onClick={() => userInput(answer, rightAnswer, indexQuestion)}
             key={ind}
             className={
-              response !== null && response.chosenAnswer === answer
+              displayResults && answer === rightAnswer
+                ? "correct"
+                : response !== null && response.chosenAnswer === answer
                 ? "chosenOne"
                 : ""
             }
@@ -31,5 +33,5 @@ function Question({
     </ul>
   );
 }
-//<button onClick={restart}>Play again</button>
+
 export default Question;
