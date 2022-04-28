@@ -19,8 +19,17 @@ function Question({
             onClick={() => userInput(answer, rightAnswer, indexQuestion)}
             key={ind}
             className={
+              //   displayResults && answer === rightAnswer
+              //     ? "correct"
+              //     : response !== null && response.chosenAnswer === answer
+              //     ? "chosenOne"
+              //     : ""
               displayResults && answer === rightAnswer
                 ? "correct"
+                : response !== null &&
+                  !displayResults &&
+                  response.chosenAnswer === answer
+                ? "chosenOneBefore"
                 : response !== null && response.chosenAnswer === answer
                 ? "chosenOne"
                 : ""
