@@ -9,7 +9,6 @@ function Options({ restart }) {
 
   const [getQuestions, setGetQuestions] = useState(false);
 
-  //https://opentdb.com/api.php?amount=10
   function getUserInput(event) {
     const { value, id } = event.target;
 
@@ -33,10 +32,12 @@ function Options({ restart }) {
 
   if (!getQuestions) {
     return (
-      <section onChange={getUserInput}>
-        <label htmlFor="Category">Select a Category</label>
+      <section className="choices" onChange={getUserInput}>
+        <label className="firstLabel" htmlFor="Category">
+          Select a Category
+        </label>
         <select name="Category" id="category">
-          <option value="">Please choose an option</option>
+          <option value="">Choose an option</option>
           <option value="Any Category">Any Category</option>
           <option value="9">General Knowledge</option>
           <option value="26">Celebrities</option>
@@ -57,7 +58,9 @@ function Options({ restart }) {
           <option value="30"> Gadgets</option>
         </select>
 
-        <label htmlFor="difficulty">Select Difficulty</label>
+        <label className="secondLabel" htmlFor="difficulty">
+          Select Difficulty
+        </label>
         <select name="difficulty" id="difficulty">
           <option value="">Choose Difficulty</option>
           <option value="Any Difficulty">Any Difficulty</option>

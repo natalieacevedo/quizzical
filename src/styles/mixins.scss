@@ -1,0 +1,22 @@
+@mixin buttons($widht, $height,$font){
+
+    width:$widht;
+    height: $height;
+    font-size:$font;
+    background-color: #4F94A0;
+    border-radius: .8rem;
+    color: whitesmoke;
+    font-weight: bolder;
+    cursor: pointer;
+    box-shadow: 0 3px 5px rgb(6, 5, 5);
+    border: 1.5px solid #77418c;
+
+}
+
+@mixin secondHeaders($margin, $size){
+    margin:$margin;
+    font-size:$size;
+    font-weight:bold;
+    color:#77418c;
+}
+

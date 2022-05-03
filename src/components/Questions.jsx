@@ -102,7 +102,9 @@ function Questions({ options, restart }) {
         {questions.map((question, indi) => {
           return (
             <>
-              <h3 key={indi}>{question.question}</h3>
+              <h3 className="question" key={indi}>
+                {question.question}
+              </h3>
               <Question
                 allAnswers={question.answersCombined}
                 rightAnswer={question.correct_answer}
@@ -116,7 +118,7 @@ function Questions({ options, restart }) {
         })}
         <button onClick={restart}>Play again</button>
         <button onClick={() => setDisplayResults(true)} disabled={finishGame}>
-          Find your results
+          Get your results
         </button>
         {displayResults && (
           <p>Your correct number of answers is {numRightAnswers}</p>

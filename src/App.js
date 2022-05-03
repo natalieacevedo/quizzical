@@ -15,7 +15,9 @@ function App() {
     displayComponent = (
       <div className="introduction">
         <Start />
-        <button onClick={selectChoices}>Start</button>
+        <button className="startGame" onClick={selectChoices}>
+          Start
+        </button>
       </div>
     );
   } else {

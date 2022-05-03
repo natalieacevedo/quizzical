@@ -1,21 +1,69 @@
-.listAnswers{
-    display:flex;
-    justify-content: space-around;
-    list-style: none;
-    li{
-        border: 5px solid pink;
-        cursor: pointer;
+.questionsContainer{
+    padding: 2.5rem;
+    .question{
+        font-size: 1rem;
+        line-height: 1.5rem;
     }
+    .listAnswers{
+        display:flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        list-style: none;
+        margin-left: -2rem;
+      
+        li{
+            border: 1px solid  #293264;
+            cursor: pointer;
+            width: fit-content;
+            text-align: center;
+            font-size: .7rem;
+            border-radius: .5rem;
+            padding: .3rem;
+            background-color: #bdcbeb;
+            white-space: nowrap;
+            margin:.3rem;
+            min-width: 0;
+
+        }
+
+        .correct{
+            background-color: greenyellow;
+        }
+        
+        .chosenOne{
+            background-color: red;
+        }
+        
+        .chosenOneBefore{
+            background-color: blue;
+        }
+
+
+    }
+    
+    button{
+        @include buttons(8.5rem, 2.1rem, 1.1rem)
+    }
+    
+
+
 }
 
-.correct{
-    background-color: greenyellow;
+@media(min-width: 700px)
+{
+   
+       .questionsContainer{
+    width: fit-content;
+    margin: 0 auto;
+        .question{
+            font-size: 1.3rem;
+        }
+        .listAnswers{li{
+            font-size: 1rem;
+        }}
+
+
+    
 }
 
-.chosenOne{
-    background-color: red;
-}
-
-.chosenOneBefore{
-    background-color: blue;
 }
