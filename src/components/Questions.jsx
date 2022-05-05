@@ -128,7 +128,7 @@ function Questions({ options, restart }) {
       </div>
     );
   } else {
-    <div class="loader"></div>;
+    <div className="loader"></div>;
   }
 }
 
