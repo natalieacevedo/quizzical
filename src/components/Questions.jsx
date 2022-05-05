@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import Question from "./Question";
 import Modal from "./Modal";
 import axios from "axios";
-import fragment from "fragment";
+
 
 function Questions({ options, restart }) {
-  console.log(fragment);
   const [questions, setAllQuestions] = useState(null);
   const [responseError, setResponseError] = useState(0);
   const [responses, setResponses] = useState(new Array(10).fill(null));
