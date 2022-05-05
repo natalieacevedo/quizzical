@@ -5,7 +5,8 @@ https://natalieacevedo.github.io/quizzical/
 
 ## The reason behind this project
 
-This project was developed as the last optional project of this React course: https://scrimba.com/learn/learnreact/section-4-solo-project-co24f49bea8aace7c174082c8. 
+This project was developed as the last optional project of this React course:
+https://scrimba.com/learn/learnreact/section-4-solo-project-co24f49bea8aace7c174082c8. 
 
 ---
 ## Description
