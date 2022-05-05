@@ -9,7 +9,6 @@ function Question({
   displayResults,
 }) {
   const response = responses[indexQuestion];
-  const [isOver, setIsOver] = useState(false);
 
   return (
     <ul className="listAnswers">
@@ -29,9 +28,8 @@ function Question({
                 ? "chosenOne"
                 : ""
             }
-          >
-            {answer}
-          </li>
+            dangerouslySetInnerHTML={{ __html: answer }}
+          ></li>
         );
       })}
     </ul>

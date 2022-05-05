@@ -19,12 +19,13 @@ height: 100vh;
     @include secondHeaders(2rem 1.5rem 1.5rem, 1.5rem)
 }
 select {
-    box-shadow: 0 5px 10px black;
     font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: .2rem;
     padding: .5rem 1rem;
     background-color: #d3d3e3;
-    color:#534f4f ;
-    border: 0;
+    color:#77418c;
+    border: 2px solid #336A74;
     cursor: pointer;
     width: 65vw;
     text-align: center;
@@ -34,6 +35,8 @@ button{
     @include  buttons(10rem,2.25rem,1.2rem);
     margin-top: 2rem;
 }
+
+  
 
 }
 
@@ -51,7 +54,7 @@ button{
     .choices{
         padding-top: 8vh;
         select{
-        width: 18vw;
+        max-width: 18vw;
     }
 .firstLabel, .secondLabel{
     font-size: 2rem;

@@ -12,19 +12,23 @@
         margin-top: -29vh;
     }
     span{
-        font-size: 1rem;
-        font-weight: bolder;
-        color: #735280;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color:#198294;
+        white-space: normal;
+        margin: 0 auto;
+        padding: .5rem;
+        line-height: 2rem;
     }
     h1{
-        font-size: 2.2rem;
+        font-size: 2.3rem;
         color: #77418c;
     }
   }
   @media(min-width: 700px){
       .introduction{
           span{
-            font-size: 1.5rem;
+            font-size: 2rem;
           }
       }
   }

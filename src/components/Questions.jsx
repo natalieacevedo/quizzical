@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Question from "./Question";
+import Modal from "./Modal";
 import axios from "axios";
+import fragment from "fragment";
 
 function Questions({ options, restart }) {
+  console.log(fragment);
   const [questions, setAllQuestions] = useState(null);
   const [responseError, setResponseError] = useState(0);
   const [responses, setResponses] = useState(new Array(10).fill(null));
@@ -87,24 +90,20 @@ function Questions({ options, restart }) {
   useEffect(getData, [options, responseError]);
 
   if (responseError) {
-    return (
-      <>
-        <h1>
-          There are not enough questions with your chosen parameters, please try
-          something different
-        </h1>
-        <button onClick={restart}>Play again</button>
-      </>
-    );
+    return <Modal restart={restart} />;
   } else if (questions) {
     return (
       <div className="questionsContainer">
         {questions.map((question, indi) => {
           return (
             <>
-              <h3 className="question" key={indi}>
-                {question.question}
-              </h3>
+              <hr />
+              {/*inserting raw HTML is not ideal, but since I tried with other options and could not make it work, and this is a trusted api, I decided to decode the string this way */}
+
+              <h3
+                className="question"
+                dangerouslySetInnerHTML={{ __html: question.question }}
+              />
               <Question
                 allAnswers={question.answersCombined}
                 rightAnswer={question.correct_answer}
@@ -116,17 +115,21 @@ function Questions({ options, restart }) {
             </>
           );
         })}
-        <button onClick={restart}>Play again</button>
-        <button onClick={() => setDisplayResults(true)} disabled={finishGame}>
-          Get your results
-        </button>
+        <div className="buttonContainer">
+          <button onClick={restart}>Play again</button>
+          <button onClick={() => setDisplayResults(true)} disabled={finishGame}>
+            See results
+          </button>
+        </div>
         {displayResults && (
-          <p>Your correct number of answers is {numRightAnswers}</p>
+          <p className="correctNumber">
+            Your correct number of answers is {numRightAnswers}
+          </p>
         )}
       </div>
     );
   } else {
-    return <h1>Loading</h1>;
+    <div class="loader"></div>;
   }
 }
 
