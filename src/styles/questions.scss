@@ -53,7 +53,7 @@
         }
         
         .chosenOneBefore{
-            background-color: #D6DBF5;
+            background-color: #efef162e;
         }
 
 
@@ -117,7 +117,6 @@
         }}
 
         .buttonContainer{
-            //width: 50%;
             justify-content: flex-start;
             button{
                 @include buttons(11rem, 2.1rem, 1.5rem);
