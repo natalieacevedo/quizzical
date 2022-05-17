@@ -7,13 +7,14 @@
 html {
   box-sizing: border-box;
 }
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
-  font-family: 'Libre Franklin', sans-serif;
- 
+  font-family: "Libre Franklin", sans-serif;
 }
 
-body{
+body {
   background: url(./images/whiteblue.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;

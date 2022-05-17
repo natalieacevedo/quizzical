@@ -1,22 +1,18 @@
-@mixin buttons($widht, $height,$font){
-
-    width:$widht;
-    height: $height;
-    font-size:$font;
-    background-color: #4F94A0;
-    border-radius: .8rem;
-    color: whitesmoke;
-    font-weight: bolder;
-    cursor: pointer;
-    border: 2px solid #77418c;
-    
-
+@mixin buttons($widht, $height, $font) {
+  width: $widht;
+  height: $height;
+  font-size: $font;
+  background-color: #4f94a0;
+  border-radius: 0.8rem;
+  color: whitesmoke;
+  font-weight: bolder;
+  cursor: pointer;
+  border: 2px solid #77418c;
 }
 
-@mixin secondHeaders($margin, $size){
-    margin:$margin;
-    font-size:$size;
-    font-weight:bold;
-    color:#77418c;
+@mixin secondHeaders($margin, $size) {
+  margin: $margin;
+  font-size: $size;
+  font-weight: bold;
+  color: #77418c;
 }
-

@@ -3,7 +3,6 @@ import Question from "./Question";
 import Modal from "./Modal";
 import axios from "axios";
 
-
 function Questions({ options, restart }) {
   const [questions, setAllQuestions] = useState(null);
   const [responseError, setResponseError] = useState(0);

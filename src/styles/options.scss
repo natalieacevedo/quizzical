@@ -1,65 +1,53 @@
+.choices {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  //background-image: url("../images/plain.jpg");
+  .firstLabel {
+    @include secondHeaders(-20rem 1.5rem 1.5rem, 1.5rem);
+  }
 
-
-
-
-.choices{
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-width: 100vw;
-height: 100vh;
-//background-image: url("../images/plain.jpg");
-.firstLabel{
-    @include secondHeaders(-20rem 1.5rem 1.5rem, 1.5rem)
-   
-}
-
-.secondLabel{
-    @include secondHeaders(2rem 1.5rem 1.5rem, 1.5rem)
-}
-select {
+  .secondLabel {
+    @include secondHeaders(2rem 1.5rem 1.5rem, 1.5rem);
+  }
+  select {
     font-size: 1.1rem;
     font-weight: bold;
-    border-radius: .2rem;
-    padding: .5rem 1rem;
+    border-radius: 0.2rem;
+    padding: 0.5rem 1rem;
     background-color: #d3d3e3;
-    color:#77418c;
-    border: 2px solid #336A74;
+    color: #77418c;
+    border: 2px solid #336a74;
     cursor: pointer;
     width: 65vw;
     text-align: center;
-
-}
-button{
-    @include  buttons(10rem,2.25rem,1.2rem);
+  }
+  button {
+    @include buttons(10rem, 2.25rem, 1.2rem);
     margin-top: 2rem;
+  }
 }
 
-  
-
-}
-
-@media(min-width: 700px)
-{
-    .choices{
-        select{
-        width: 30vw;
-    }}
-
-}
-
-@media(min-width: 1300px)
-{
-    .choices{
-        padding-top: 8vh;
-        select{
-        max-width: 18vw;
+@media (min-width: 700px) {
+  .choices {
+    select {
+      width: 30vw;
     }
-.firstLabel, .secondLabel{
-    font-size: 2rem;
+  }
 }
 
-}
-
+@media (min-width: 1300px) {
+  .choices {
+    padding-top: 8vh;
+    select {
+      max-width: 18vw;
+    }
+    .firstLabel,
+    .secondLabel {
+      font-size: 2rem;
+    }
+  }
 }

@@ -1,34 +1,34 @@
 .introduction {
-    text-align: center;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-evenly;
+  .startGame {
+    @include buttons(12rem, 3.25rem, 1.5rem);
+    margin-top: -29vh;
+  }
+  span {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #198294;
+    white-space: normal;
     margin: 0 auto;
-    align-items: center;
-    justify-content: space-evenly;
-    .startGame{
-        @include buttons(12rem,3.25rem,1.5rem);
-        margin-top: -29vh;
-    }
-    span{
-        font-size: 1.2rem;
-        font-weight: 700;
-        color:#198294;
-        white-space: normal;
-        margin: 0 auto;
-        padding: .5rem;
-        line-height: 2rem;
-    }
-    h1{
-        font-size: 2.3rem;
-        color: #77418c;
+    padding: 0.5rem;
+    line-height: 2rem;
+  }
+  h1 {
+    font-size: 2.3rem;
+    color: #77418c;
+  }
+}
+@media (min-width: 700px) {
+  .introduction {
+    span {
+      font-size: 2rem;
     }
   }
-  @media(min-width: 700px){
-      .introduction{
-          span{
-            font-size: 2rem;
-          }
-      }
-  }
+}
