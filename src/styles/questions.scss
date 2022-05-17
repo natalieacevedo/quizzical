@@ -125,6 +125,10 @@
             
             }
         }
+
+         button:disabled{
+         cursor: not-allowed;
+    }
     
         .correctNumber{
             width: 50%;
